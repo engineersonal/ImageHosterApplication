@@ -5,6 +5,9 @@ import ImageHoster.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class UserService {
 
@@ -30,6 +33,17 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    //This method validates the password entered by the user to have 1 alphabet, 1 number and 1 special character
+    //The minimum length of the password must be 8 characters and maximum length can be 40 characters
+    public boolean validate(String password){
+
+        String PASSWORD_PATTERN = "((?=.*[a-zA-Z])(?=.*\\d)(?=.*[@#$%!~^&*()_+{}|]).{8,40})";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(password);
+
+        return matcher.matches();
     }
 
 }
