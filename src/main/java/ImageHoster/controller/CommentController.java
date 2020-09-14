@@ -40,8 +40,7 @@ public class CommentController {
         commentService.saveComment(userComment);
 
         Image imageWithComments = imageservice.getImage(imageId);
-        List<Comment> comments = commentService.getAllComments(imageId);
-        model.addAttribute("comments", comments);
+        model.addAttribute("comments", imageWithComments.getComments());
         model.addAttribute("image", imageWithComments);
         model.addAttribute("tags", imageWithComments.getTags());
 
